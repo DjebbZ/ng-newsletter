@@ -9,6 +9,13 @@
     <div ng-controller="MyController">
         {{ person.name }}
     </div>
+    <div ng-controller="ParentController">
+        <div ng-controller="ChildController">
+            <input type="text" name="person-name" ng-model="person.name">
+            <a ng-click="sayHello()">Say Hello</a>
+        </div>
+        {{ person }}
+    </div>
     <script src="bower_components/angular/angular.js"></script>
     <script src="js/main.js"></script>
 </body>
