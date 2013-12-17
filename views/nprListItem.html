@@ -1,4 +1,9 @@
-<div ng-click="play(ngModel)">
+<div>
     <h6>{{ ngModel.title.$text }}</h6>
-    <div><a href="{{ ngModel.link[0].$text }}">Link</a></div>
+    <div><a href="{{ ngModel.link[0].$text }}">Link to content</a></div>
+    <p>Duration {{ duration }}</p>
+    <p ng-show="player.progress">Current time: {{ player.progress | number:0 }}s</p>
+    <p ng-show="player.progress_percent">Current progress: {{ player.progress_percent | number:1 }}%</p>
+    <button ng-click="player.play(ngModel)">Play</button>
+    <button ng-click="player.stop()">Stop</button>
 </div>

@@ -8,14 +8,9 @@
     <div ng-controller="PlayerController">
         <ul id="programs_list">
             <li ng-repeat="program in programs">
-                <npr-link ng-model="program" play="play(program)"></npr-link>
+                <npr-link ng-model="program" player="player"></npr-link>
             </li>
         </ul>
-    </div>
-    <div ng-controller="ServiceController">
-        <label for="username">Type in a Github username</label>
-        <input type="text" ng-model="username" placeholder="Enter a Github username, like aUser">
-        <pre ng-show="username">{{ events }}</pre>
     </div>
     <script src="bower_components/angular/angular.js"></script>
     <script src="js/main.js"></script>

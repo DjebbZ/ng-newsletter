@@ -2,17 +2,8 @@ var apiKey  = 'MDEyODA4MzMzMDEzODcyODYxMjlkNzhmYg001',
     npUrl   = 'http://api.npr.org/query?id=61&fields=relatedLink,title,byline,text,audio,image,pullQuote,all&output=JSON';
 
 angular.module('myApp', [])
-    .controller('PlayerController', ['$scope', '$http', function($scope, $http) {
-        $scope.playing = false;
-        var audio = document.createElement('audio');
-
-        $scope.play = function(program) {
-            if ($scope.playing) audio.pause();
-            var url = program.audio[0].format.mp4.$text;
-            audio.src = url;
-            audio.play();
-            $scope.playing = true;
-        };
+    .controller('PlayerController', ['$scope', '$http', 'player', function($scope, $http, player) {
+        $scope.player = player;
 
         $http({
             method: 'JSONP',
@@ -23,20 +14,59 @@ angular.module('myApp', [])
             $scope.programs = data;
         })
     }])
-    .controller('ServiceController', ['$scope', '$timeout', 'githubService', function($scope, $timeout, gh) {
-        var timeout;
+    .factory('audio', ['$document', function($document) {
+        return $document[0].createElement('audio');
+    }])
+    .factory('player', ['audio', '$rootScope', function(audio, $rootScope) {
+        var player = {
+            playing: false,
+            current: null,
+            ready: false,
 
-        $scope.$watch('username', function(newVal) {
-            if (newVal) {
-                if (timeout) $timeout.cancel(timeout);
+            play: function(program) {
+                if (player.playing) player.stop();
+                var url = program.audio[0].format.mp4.$text;
+                player.current = program;
+                audio.src = url;
+                audio.play();
+                player.playing = true;
+            },
 
-                timeout = $timeout(function() {
-                    gh.events(newVal).success(function(data) {
-                        $scope.events = data.data;
-                    });
-                }, 350);
+            stop: function() {
+                if (player.playing) {
+                    audio.pause();
+                    player.ready = player.playing = false;
+                    player.current = null;
+                }
+            },
+
+            currentTime: function() {
+                return audio.currentTime;
+            },
+
+            currentDuration: function() {
+                return parseInt(audio.duration);
             }
+        };
+
+        audio.addEventListener('ended', function() {
+            $rootScope.$apply(player.stop());
         });
+
+        audio.addEventListener('timeupdate', function() {
+            $rootScope.$apply(function() {
+                player.progress = player.currentTime();
+                player.progress_percent = player.progress / player.currentDuration() * 100;
+            });
+        });
+
+        audio.addEventListener('canplay', function() {
+            $rootScope.$apply(function() {
+                player.ready = true;
+            });
+        });
+
+        return player;
     }])
     .directive('nprLink', function() {
         return {
@@ -45,7 +75,7 @@ angular.module('myApp', [])
             replace: true,
             scope: {
                 ngModel: '=',
-                play: '&'
+                player: '='
             },
             templateUrl: '/views/nprListItem.html',
             link: function(scope, el, attr) {
@@ -53,15 +83,4 @@ angular.module('myApp', [])
             }
         }
     })
-    .factory('githubService', ['$http', function($http) {
-        var doRequest = function(username, path) {
-            return $http({
-                method: 'JSONP',
-                url: 'https://api.github.com/users/' + username + '/' + path + '?callback=JSON_CALLBACK'
-            });
-        };
-
-        return {
-            events: function(username) { return doRequest(username, 'events'); }
-        }
-    }]);
+;
