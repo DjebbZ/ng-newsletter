@@ -1,18 +1,12 @@
 var apiKey  = 'MDEyODA4MzMzMDEzODcyODYxMjlkNzhmYg001',
-    npUrl   = 'http://api.npr.org/query?id=61&fields=relatedLink,title,byline,text,audio,image,pullQuote,all&output=JSON';
+    nprUrl   = 'http://api.npr.org/query?id=61&fields=relatedLink,title,byline,text,audio,image,pullQuote,all&output=JSON';
 
 angular.module('myApp', [])
-    .controller('PlayerController', ['$scope', '$http', 'player', function($scope, $http, player) {
+    .controller('PlayerController', ['$scope', 'nprService', 'player', function($scope, nprService, player) {
         $scope.player = player;
-
-        $http({
-            method: 'JSONP',
-            url: npUrl + '&apiKey=' + apiKey + '&callback=JSON_CALLBACK'
-        }).success(function(data, status) {
+        nprService.programs(apiKey).success(function(data) {
             $scope.programs = data.list.story;
-        }).error(function(data, status) {
-            $scope.programs = data;
-        })
+        });
     }])
     .factory('audio', ['$document', function($document) {
         return $document[0].createElement('audio');
@@ -67,6 +61,18 @@ angular.module('myApp', [])
         });
 
         return player;
+    }])
+    .factory('nprService', ['$http', function($http) {
+        var doRequest = function(apiKey) {
+            return $http({
+                method: 'JSONP',
+                url: nprUrl + '&apiKey=' + apiKey + '&callback=JSON_CALLBACK'
+            });
+        }
+
+        return {
+            programs: function(apiKey) { return doRequest(apiKey); }
+        }
     }])
     .directive('nprLink', function() {
         return {
