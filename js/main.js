@@ -26,4 +26,9 @@ angular.module('myApp', [])
             $scope.clock = new Date();
             $timeout(updateTime, 1000);
         })();
+    }])
+    .controller('AddController', ['$scope', function($scope) {
+        $scope.counter = 0;
+        $scope.add = function(amount) { $scope.counter += amount; }
+        $scope.substract = function(amount) { $scope.counter -= amount; }
     }]);

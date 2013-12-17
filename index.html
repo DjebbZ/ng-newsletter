@@ -16,6 +16,12 @@
         <p>Hello {{ person.name }}</p>
         <p>{{ clock }}</p>
     </div>
+    <div ng-controller="AddController">
+        <h4>The simplest adding machine ever</h4>
+        <button ng-click="add(1)">Add</button>
+        <button ng-click="substract(1)">Substract</button>
+        <h4>Current counter : {{ counter }}</h4>
+    </div>
     <script src="bower_components/angular/angular.js"></script>
     <script src="js/main.js"></script>
 </body>
