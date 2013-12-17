@@ -6,21 +6,7 @@
 </head>
 <body>
     <div ng-controller="PlayerController">
-        <button ng-click="play()" ng-show="!playing">Play</button>
-        <button ng-click="stop()" ng-show="playing">Stop</button>
-        Playing audio: <b>{{ playing }}</b>
-    </div>
-    <hr>
-    <div ng-controller="MyController">
-        <input type="text" ng-model="person.name" placeholder="Enter your name">
-        <p>Hello {{ person.name }}</p>
-        <p>{{ clock }}</p>
-    </div>
-    <div ng-controller="AddController">
-        <h4>The simplest adding machine ever</h4>
-        <button ng-click="add(1)">Add</button>
-        <button ng-click="substract(1)">Substract</button>
-        <h4>Current counter : {{ counter }}</h4>
+        {{ programs }}
     </div>
     <script src="bower_components/angular/angular.js"></script>
     <script src="js/main.js"></script>

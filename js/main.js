@@ -1,34 +1,14 @@
+var apiKey  = 'MDEyODA4MzMzMDEzODcyODYxMjlkNzhmYg001',
+    npUrl   = 'http://api.npr.org/query?id=61&fields=relatedLink,title,byline,text,audio,image,pullQuote,all&output=JSON';
+
 angular.module('myApp', [])
-    .controller('PlayerController', ['$scope', function($scope) {
-        $scope.playing = false;
-        $scope.audio = document.createElement('audio');
-        $scope.audio.src = '/media/npr.mp4';
-
-        $scope.play = function() {
-            $scope.audio.play();
-            $scope.playing = true;
-        };
-        $scope.stop = function() {
-            $scope.audio.pause();
-            $scope.playing = false;
-        };
-        $scope.audio.addEventListener('ended', function() {
-            $scope.$apply(function() {
-                $scope.stop();
-            });
-        });
-    }])
-    .controller('RelatedController', ['$scope', function($scope) {}])
-    .controller('MyController', ['$scope', '$timeout', function($scope, $timeout) {
-        $scope.person = { name: "Ari Lerner" };
-
-        (function updateTime() {
-            $scope.clock = new Date();
-            $timeout(updateTime, 1000);
-        })();
-    }])
-    .controller('AddController', ['$scope', function($scope) {
-        $scope.counter = 0;
-        $scope.add = function(amount) { $scope.counter += amount; }
-        $scope.substract = function(amount) { $scope.counter -= amount; }
+    .controller('PlayerController', ['$scope', '$http', function($scope, $http) {
+        $http({
+            method: 'JSONP',
+            url: npUrl + '&apiKey=' + apiKey + '&callback=JSON_CALLBACK'
+        }).success(function(data, status) {
+            $scope.programs = data.list.story;
+        }).error(function(data, status) {
+            $scope.programs = data;
+        })
     }]);
