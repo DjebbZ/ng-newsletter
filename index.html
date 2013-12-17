@@ -13,6 +13,12 @@
         <button ng-init="shouldShow = true" ng-click="shouldShow = !shouldShow">Flip the shouldShow variable</button>
         <b ng-show="shouldShow">Showing {{ shouldShow }}</b>
         <b ng-hide="shouldShow">Hiding {{ shouldShow }}</b>
+        <ul>
+            <li ng-repeat="person in roommates">{{ person.name }}</li>
+        </ul>
+        <ul>
+            <li ng-repeat="(name, color) in people">{{ name }}'s favorite color is {{ color }}</li>
+        </ul>
         <div>{{ programs }}</div>
     </div>
     <script src="bower_components/angular/angular.js"></script>

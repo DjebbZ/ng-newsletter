@@ -3,6 +3,18 @@ var apiKey  = 'MDEyODA4MzMzMDEzODcyODYxMjlkNzhmYg001',
 
 angular.module('myApp', [])
     .controller('PlayerController', ['$scope', '$http', function($scope, $http) {
+        $scope.roommates = [
+            {name: 'Ari'},
+            {name: 'Q'},
+            {name: 'Sean'},
+            {name: 'Anand'}
+        ];
+        $scope.people = {
+            'Ari': 'orange',
+            'Q': 'green',
+            'Sean': 'blue',
+            'Anand': 'red'
+        };
         $http({
             method: 'JSONP',
             url: npUrl + '&apiKey=' + apiKey + '&callback=JSON_CALLBACK'
