@@ -18,4 +18,5 @@ angular.module('myApp', [])
             });
         });
     }])
-    .controller('RelatedController', ['$scope', function($scope) {}]);
+    .controller('RelatedController', ['$scope', function($scope) {}])
+    .controller('MyController', ['$scope', function($scope) {}]);
