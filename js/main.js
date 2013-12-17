@@ -22,4 +22,19 @@ angular.module('myApp', [])
         }).error(function(data, status) {
             $scope.programs = data;
         })
-    }]);
+    }])
+    .directive('nprLink', function() {
+        return {
+            restrict: 'EA',
+            require: ['^ngModel'],
+            replace: true,
+            scope: {
+                ngModel: '=',
+                play: '&'
+            },
+            templateUrl: '/views/nprListItem.html',
+            link: function(scope, el, attr) {
+                scope.duration = scope.ngModel.audio[0].duration.$text;
+            }
+        }
+    });

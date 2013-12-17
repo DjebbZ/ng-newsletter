@@ -7,7 +7,9 @@
 <body>
     <div ng-controller="PlayerController">
         <ul id="programs_list">
-            <li ng-repeat="program in programs" ng-click="play(program)"><span>{{ program.title.$text }}</span></li>
+            <li ng-repeat="program in programs">
+                <npr-link ng-model="program" play="play(program)"></npr-link>
+            </li>
         </ul>
     </div>
     <script src="bower_components/angular/angular.js"></script>
