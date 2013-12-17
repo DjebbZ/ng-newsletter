@@ -8,6 +8,8 @@
     <div ng-controller="PlayerController">
         <p>{{ 8 + 1}}</p>
         <p>{{ 10 * 3.3 | currency }}</p>
+        <p ng-init="name = 'Ari Lerner'">Hello, {{ name }}</p>
+        <button ng-click="count = count + 1" ng-init="count=0">Increment</button> count: {{ count }}
         <div>{{ programs }}</div>
     </div>
     <script src="bower_components/angular/angular.js"></script>
