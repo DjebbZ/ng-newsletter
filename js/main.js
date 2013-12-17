@@ -1,19 +1,21 @@
 angular.module('myApp', [])
-    .run(function($rootScope) {
-        $rootScope.name = "Ari Lerner";
-    })
-    .controller('MyController', function($scope) {
-        $scope.person = {
-            name: "Ari Lerner"
-        }
-    })
-    .controller('ParentController', function($scope) {
-        $scope.person = {
-            greeted: false
-        }
-    })
-    .controller('ChildController', function($scope) {
-        $scope.sayHello = function() {
-            $scope.person.greeted = true;
-        }
-    });
+    .controller('PlayerController', ['$scope', function($scope) {
+        $scope.playing = false;
+        $scope.audio = document.createElement('audio');
+        $scope.audio.src = '/media/npr.mp4';
+
+        $scope.play = function() {
+            $scope.audio.play();
+            $scope.playing = true;
+        };
+        $scope.stop = function() {
+            $scope.audio.pause();
+            $scope.playing = false;
+        };
+        $scope.audio.addEventListener('ended', function() {
+            $scope.$apply(function() {
+                $scope.stop();
+            });
+        });
+    }])
+    .controller('RelatedController', ['$scope', function($scope) {}]);

@@ -5,16 +5,10 @@
     <title>NG-Newsletter Series part 1</title>
 </head>
 <body>
-    <h1>{{ name }}</h1>
-    <div ng-controller="MyController">
-        {{ person.name }}
-    </div>
-    <div ng-controller="ParentController">
-        <div ng-controller="ChildController">
-            <input type="text" name="person-name" ng-model="person.name">
-            <a ng-click="sayHello()">Say Hello</a>
-        </div>
-        {{ person }}
+    <div ng-controller="PlayerController">
+        <button ng-click="play()" ng-show="!playing">Play</button>
+        <button ng-click="stop()" ng-show="playing">Stop</button>
+        Playing audio: <b>{{ playing }}</b>
     </div>
     <script src="bower_components/angular/angular.js"></script>
     <script src="js/main.js"></script>
