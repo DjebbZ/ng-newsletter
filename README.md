@@ -3,6 +3,13 @@ Ng-newsletter
 
 Following the articles in the series [from beginner to expert](http://www.ng-newsletter.com/posts/beginner2expert-how_to_start.html) in order to learn Angular.js
 
+Usage
+=====
+
+1. Clone : `git clone git@github.com:DjebbZ/ng-newsletter.git`
+2. Install dependencies with Bower : `bower install`
+3. Play !
+
 LICENSE
 =======
 
