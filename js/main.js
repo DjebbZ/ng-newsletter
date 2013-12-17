@@ -19,4 +19,13 @@ angular.module('myApp', [])
         });
     }])
     .controller('RelatedController', ['$scope', function($scope) {}])
-    .controller('MyController', ['$scope', function($scope) {}]);
+    .controller('MyController', ['$scope', function($scope) {
+        $scope.person = { name: "Ari Lerner" };
+        function updateClock () {
+            $scope.clock = new Date();
+        }
+        var timer = setInterval(function() {
+            $scope.$apply(updateClock);
+        }, 1000);
+        updateClock();
+    }]);
