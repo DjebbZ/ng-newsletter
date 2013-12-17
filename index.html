@@ -12,6 +12,11 @@
             </li>
         </ul>
     </div>
+    <div ng-controller="ServiceController">
+        <label for="username">Type in a Github username</label>
+        <input type="text" ng-model="username" placeholder="Enter a Github username, like aUser">
+        <pre ng-show="username">{{ events }}</pre>
+    </div>
     <script src="bower_components/angular/angular.js"></script>
     <script src="js/main.js"></script>
 </body>
