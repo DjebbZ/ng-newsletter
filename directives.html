@@ -5,10 +5,8 @@
     <title>NG-Newsletter Directives</title>
 </head>
 <body>
-    <div ng-controller="ScopeCtrl">
-        <input type="text" ng-model="city" placeholder="Enter a city">
-        <div ng-sparkline ng-model="city" lolify="lolify(city)" temperature="{{ 37.2 | number:2 }}"></div>
-    </div>
+    <input type="text" ng-model="city" placeholder="Enter a city">
+    <div ng-sparkline city="SF"></div>
     <script src="bower_components/angular/angular.js"></script>
     <script src="js/directives.js"></script>
 </body>

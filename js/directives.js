@@ -2,17 +2,10 @@ angular.module('directives', [])
     .directive('ngSparkline', function() {
         return {
             restrict: 'AECM',
-            require: '^ngModel',
+            require: '^city',
             scope: {
-                city: '=ngModel',
-                lolify: '&',
-                temperature: '@'
+                city: '@'
             },
             templateUrl: 'views/ng-sparkline.html'
         }
     })
-    .controller('ScopeCtrl', ['$scope', function($scope) {
-        $scope.lolify = function(text) {
-            if (text) return text + ' KIKOU-LOL!!'
-        }
-    }])
