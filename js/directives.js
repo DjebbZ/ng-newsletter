@@ -4,6 +4,18 @@ angular.module('directives', [])
             controller: function() {}
         }
     })
+    .factory('openweathermap', ['$http', function($http) {
+        var url = 'http://api.openweathermap.org/data/2.5/forecast/daily?mode=json&units=imperial&cnt=14&callback=JSON_CALLBACK&q='
+
+        var doRequest = function(city) {
+            return $http({
+                method: 'JSONP',
+                url: url + city
+            })
+        }
+
+        return doRequest
+    }])
     .directive('ngSparkline', function() {
         return {
             restrict: 'A',
@@ -12,14 +24,9 @@ angular.module('directives', [])
                 city: '='
             },
             templateUrl: 'views/ng-sparkline.html',
-            controller: ['$scope', '$http', function($scope, $http) {
-                var url = 'http://api.openweathermap.org/data/2.5/forecast/daily?mode=json&units=imperial&cnt=14&callback=JSON_CALLBACK&q='
-
+            controller: ['$scope', 'openweathermap', function($scope, openweathermap) {
                 $scope.getTemp = function(city) {
-                    $http({
-                        method: 'JSONP',
-                        url: url + city
-                    }).success(function(data) {
+                    openweathermap(city).success(function(data) {
                         console.log(data)
                         var weather = [];
                         angular.forEach(data.list, function(value){
