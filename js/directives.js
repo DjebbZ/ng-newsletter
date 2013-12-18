@@ -31,11 +31,11 @@ angular.module('directives', [])
             }],
             link: function(scope, iElement, iAttrs, ctrl) {
                 scope.getTemp(scope.city)
-                scope.$watch('weather', function(newValue, oldValue, scope) {
+                scope.$watch('weather', function(newValue) {
                     var highs   = []
 
                     if (newValue) {
-                        angular.forEach(scope.weather, function(value, key){
+                        angular.forEach(scope.weather, function(value){
                             highs.push(value.temp.max)
                         });
                         chartGraph(iElement, highs, iAttrs)
