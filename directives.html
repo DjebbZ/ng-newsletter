@@ -5,7 +5,12 @@
     <title>NG-Newsletter Directives</title>
 </head>
 <body>
-    <div ng-sparkline city="San Francisco" width="400" height="200"></div>
+    <select ng-model="city" name="city" id="city">
+        <option value="San Francisco">San Francisco</option>
+        <option value="London">London</option>
+        <option value="Paris">Paris</option>
+    </select>
+    <div ng-sparkline city="city" width="400" height="200"></div>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/d3/d3.js"></script>
     <script src="js/directives.js"></script>

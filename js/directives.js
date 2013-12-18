@@ -9,7 +9,7 @@ angular.module('directives', [])
             restrict: 'A',
             require: '^city',
             scope: {
-                city: '@'
+                city: '='
             },
             templateUrl: 'views/ng-sparkline.html',
             controller: ['$scope', '$http', function($scope, $http) {
@@ -30,7 +30,10 @@ angular.module('directives', [])
                 }
             }],
             link: function(scope, iElement, iAttrs, ctrl) {
-                scope.getTemp(scope.city)
+                scope.$watch('city', function(newValue) {
+                    if (newValue) scope.getTemp(newValue)
+                })
+
                 scope.$watch('weather', function(newValue) {
                     var highs   = []
 
@@ -52,6 +55,9 @@ var chartGraph = function(element, data, opts) {
       padding = opts.padding || 30;
 
   // chart
+  // remove previous chart if any
+  d3.select('svg').remove();
+  // draw new chart
   var svg     = d3.select(element[0])
                   .append('svg:svg')
                   .attr('width', width)
