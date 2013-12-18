@@ -13,7 +13,7 @@ angular.module('directives', [])
             },
             templateUrl: 'views/ng-sparkline.html',
             controller: ['$scope', '$http', function($scope, $http) {
-                var url = 'http://api.openweathermap.org/data/2.5/weather?units=metric&callback=JSON_CALLBACK&q='
+                var url = 'http://api.openweathermap.org/data/2.5/forecast/daily?mode=json&units=imperial&cnt=14&callback=JSON_CALLBACK&q='
 
                 $scope.getTemp = function(city) {
                     $http({
@@ -21,7 +21,11 @@ angular.module('directives', [])
                         url: url + city
                     }).success(function(data) {
                         console.log(data)
-                        $scope.weather = data
+                        var weather = [];
+                        angular.forEach(data.list, function(value){
+                            weather.push(value)
+                        });
+                        $scope.weather = weather
                     })
                 }
             }],
