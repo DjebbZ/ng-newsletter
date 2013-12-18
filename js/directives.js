@@ -21,11 +21,7 @@ angular.module('directives', [])
                         url: url + city
                     }).success(function(data) {
                         console.log(data)
-                        var weather = [];
-                        angular.forEach(data.list, function(value) {
-                            weather.push(value)
-                        })
-                        $scope.weather = weather
+                        $scope.weather = data
                     })
                 }
             }],
