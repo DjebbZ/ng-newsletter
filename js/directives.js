@@ -1,7 +1,7 @@
 angular.module('directives', [])
     .directive('city', function() {
         return {
-            controller: function($scope) {}
+            controller: function() {}
         }
     })
     .directive('ngSparkline', function() {
