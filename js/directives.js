@@ -6,7 +6,7 @@ angular.module('directives', [])
     })
     .directive('ngSparkline', function() {
         return {
-            restrict: 'AECM',
+            restrict: 'A',
             require: '^city',
             scope: {
                 city: '@'
