@@ -5,7 +5,8 @@ angular.module('directives', [])
             require: '^ngModel',
             scope: {
                 city: '=ngModel',
-                lolify: '&'
+                lolify: '&',
+                temperature: '@'
             },
             templateUrl: 'views/ng-sparkline.html'
         }
