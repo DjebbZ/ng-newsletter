@@ -1,16 +1,16 @@
 angular.module('directives', [])
-    // .directive('city', function() {
-    //     return {
-    //         controller: function() {}
-    //     }
-    // })
+    .directive('city', function() {
+        return {
+            controller: function() {}
+        }
+    })
     .directive('ngSparkline', function() {
         return {
             restrict: 'AECM',
-            // require: '^city',
-            // scope: {
-            //     city: '@'
-            // },
+            require: '^city',
+            scope: {
+                city: '@'
+            },
             templateUrl: 'views/ng-sparkline.html',
             controller: ['$scope', '$http', function($scope, $http) {
                 var url = 'http://api.openweathermap.org/data/2.5/forecast/daily?mode=json&units=imperial&cnt=14&callback=JSON_CALLBACK&q='
@@ -30,7 +30,7 @@ angular.module('directives', [])
                 }
             }],
             link: function(scope, iElement, iAttrs, ctrl) {
-                scope.getTemp(iAttrs.city)
+                scope.getTemp(scope.city)
                 scope.$watch('weather', function(newValue, oldValue, scope) {
                     var highs   = []
 
