@@ -31,6 +31,15 @@ angular.module('directives', [])
             }],
             link: function(scope, iElement, iAttrs, ctrl) {
                 scope.getTemp(iAttrs.city)
+                scope.$watch('weather', function(newValue, oldValue, scope) {
+                    var highs   = []
+
+                    if (newValue) {
+                        angular.forEach(scope.weather, function(value, key){
+                            highs.push(value.temp.max)
+                        });
+                    }
+                });
             }
         }
     })
