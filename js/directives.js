@@ -4,8 +4,14 @@ angular.module('directives', [])
             restrict: 'AECM',
             require: '^ngModel',
             scope: {
-                ngModel: '='
+                city: '=ngModel',
+                lolify: '&'
             },
             templateUrl: 'views/ng-sparkline.html'
         }
     })
+    .controller('ScopeCtrl', ['$scope', function($scope) {
+        $scope.lolify = function(text) {
+            if (text) return text + ' KIKOU-LOL!!'
+        }
+    }])
