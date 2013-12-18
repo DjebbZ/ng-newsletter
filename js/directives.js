@@ -1,7 +1,7 @@
 angular.module('directives', [])
     .directive('ngSparkline', function() {
         return {
-            restrict: 'A',
+            restrict: 'AECM',
             template: '<div class="sparkline"></div>'
         }
     })
